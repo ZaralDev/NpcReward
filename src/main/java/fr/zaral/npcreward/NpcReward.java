@@ -1,5 +1,6 @@
 package fr.zaral.npcreward;
 
+import fr.zaral.npcreward.commands.CommandManager;
 import fr.zaral.npcreward.npc.NpcManager;
 import fr.zaral.npcreward.utils.CodeUtils;
 import lombok.Getter;
@@ -27,6 +28,9 @@ public class NpcReward extends JavaPlugin {
         settings = new Settings(this);
         CodeUtils.logToConsole("Loading messages");
         Lang.initMessages();
+
+        CodeUtils.logToConsole("Loading commands");
+        new CommandManager(this);
 
 
     }
