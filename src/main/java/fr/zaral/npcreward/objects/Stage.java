@@ -53,6 +53,14 @@ public class Stage {
         spawnPnj();
     }
 
+    public boolean containsNpc(Npc npc) {
+        for (Npc npcc : this.npc) {
+            if (npcc.equals(npc)) {
+                return true;
+            }
+        }
+        return false;
+    }
     private boolean createPlinth() {
         World world = player.getWorld();
         Location plinthLoc = new Location(world, location.getBlockX(), location.getY() + 0, location.getBlockZ());

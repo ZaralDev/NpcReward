@@ -1,11 +1,15 @@
 package fr.zaral.npcreward.listeners;
 
 import fr.zaral.npcreward.NpcReward;
+import fr.zaral.npcreward.npc.Npc;
 import fr.zaral.npcreward.objects.Stage;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -37,6 +41,23 @@ public class PlayerListener implements Listener {
                 }
             }
         }
+    }
+
+    @EventHandler
+    public void onPlayerInteractAtEntity(PlayerInteractEntityEvent event ) {
+        Player player = event.getPlayer();
+        Stage stage = pl.getStageManager().isInStage(player);
+        Entity clicked = event.getRightClicked();
+        if (stage != null) {
+            event.setCancelled(true);
+            if (clicked instanceof Villager) {
+                Npc npc = pl.getNpcManager().getNpc(clicked.getName(), player);
+                if (npc != null && stage.containsNpc(npc)) {
+                    //todo Reward
+                }
+            }
+        }
+
     }
 
 }

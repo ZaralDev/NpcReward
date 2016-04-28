@@ -27,6 +27,14 @@ public class NpcManager {
         return new Npc(this, name, location, profession, target);
     }
 
+    public Npc getNpc(String name, Player target) {
+        for (Npc npc : npcList) {
+            if (npc.getName().equals(name) && target.equals(npc.getTarget())) {
+                return npc;
+            }
+        }
+        return null;
+    }
     public Npc spawnNpc(String name, Location location, Player target) {
         return new Npc(this, name, location, target);
     }
