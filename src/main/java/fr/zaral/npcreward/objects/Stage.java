@@ -35,6 +35,7 @@ public class Stage {
     public Stage(Player player) {
         this.player = player;
         this.location = player.getLocation();
+        startStage();
     }
 
     private void freezePlayer() {
