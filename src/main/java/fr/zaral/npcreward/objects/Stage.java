@@ -100,22 +100,21 @@ public class Stage {
                 switch (i) {
                     case (0):
                         player.playSound(a, Sound.NOTE_PLING, 1f, 1f);
-                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], a, pl.getSettings().getProfession(), player);
+                        npc.add(pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], a, pl.getSettings().getProfession(), player));
                         break;
                     case (1):
                         player.playSound(b, Sound.NOTE_PLING, 1f, 1f);
-                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], b, pl.getSettings().getProfession(), player);
+                        npc.add(pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], b, pl.getSettings().getProfession(), player));
                         break;
                     case (2):
                         player.playSound(c, Sound.NOTE_PLING, 1f, 1f);
-                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], c, pl.getSettings().getProfession(), player);
+                        npc.add(pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], c, pl.getSettings().getProfession(), player));
                         break;
                     case (3):
                         player.playSound(d, Sound.NOTE_PLING, 1f, 1f);
-                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], d, pl.getSettings().getProfession(), player);
+                        npc.add(pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], d, pl.getSettings().getProfession(), player));
                         break;
                     case (4):
-
                         TitlesLib.sendTitle(player, PacketPlayOutTitle.EnumTitleAction.TITLE, Lang.TITLE, 20, 20, 20, ChatColor.RED);
                         TitlesLib.sendTitle(player, PacketPlayOutTitle.EnumTitleAction.SUBTITLE, Lang.SUBTITLE, 20, 20, 20, ChatColor.WHITE);
                         player.playSound(location, Sound.LEVEL_UP, 1f, 1f);

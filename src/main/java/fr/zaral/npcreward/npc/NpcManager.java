@@ -23,12 +23,12 @@ public class NpcManager {
         this.pl = pl;
     }
 
-    public void spawnNpc(String name, Location location, Villager.Profession profession, Player target) {
-        new Npc(this, name, location, profession, target);
+    public Npc  spawnNpc(String name, Location location, Villager.Profession profession, Player target) {
+        return new Npc(this, name, location, profession, target);
     }
 
-    public void spawnNpc(String name, Location location, Player target) {
-        new Npc(this, name, location, target);
+    public Npc spawnNpc(String name, Location location, Player target) {
+        return new Npc(this, name, location, target);
     }
 
 }

@@ -33,7 +33,6 @@ public class Lang {
         SENDERNOSPACE = config.getString("SenderNotEnoughtSpace");
         TITLE = config.getString("Title");
         SUBTITLE = config.getString("Subtitle");
-
     }
 
     public static void reloadConfig() {
