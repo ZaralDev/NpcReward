@@ -21,6 +21,11 @@ public class Lang {
         ITEM_RECEIVED = config.getString("ItemRewardReceived");
     }
 
+    public static void reloadConfig() {
+        langConfig.reloadConfig();
+        initMessages();
+    }
+
     public static String NOPERM;
     public static String ITEM_RECEIVED;
 

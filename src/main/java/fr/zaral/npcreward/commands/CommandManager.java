@@ -16,6 +16,7 @@ public class CommandManager {
 
     private void loadCommands() {
         pl.getCommand("itemreward").setExecutor(new ItemRewardCommand(pl));
+        pl.getCommand("rewardreloadconfig").setExecutor(new ReloadCommand(pl));
     }
 
 

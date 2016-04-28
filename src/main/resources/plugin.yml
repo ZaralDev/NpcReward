@@ -9,6 +9,10 @@ commands:
       description: give item for reward
       aliases: [ireward, greward]
       usage: /<command>
+   rewardreloadconfig:
+      description: reload config
+      aliases: [npcrewardreload, rewardreload]
+      usage: /<command>
 permissions:
    npcreward.cmd:
      description: Allows you to start rewarding stage with cmd
