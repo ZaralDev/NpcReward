@@ -1,0 +1,28 @@
+name: NpcReward
+main: fr.zaral.npcreward.NpcReward
+version: 0.2
+description: NpcReward plugin
+author: Zaral
+
+commands:
+   itemreward:
+      description: give item for reward
+      aliases: [ireward, greward]
+      usage: /<command>
+permissions:
+   npcreward.cmd:
+     description: Allows you to start rewarding stage with cmd
+     default: op
+   npcreward.others.cmd:
+     description: Allows you to start rewarding stage to others players
+     default: op
+   npcreward.item.use:
+     description: Allows you to start rewarding stage with item
+     default: op
+   npcreward.admin:
+     description: All permissions
+     default: op
+     children:
+        npcreward.cmd: true
+        npcreward.others.cmd: true
+        npcreward.item.use: true

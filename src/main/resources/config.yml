@@ -1,0 +1,8 @@
+CustomItem:
+    #You can find all material you can use here https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+    Type: "EMERALD"
+    Name: "NpcReward &7(Right-Clic)"
+    Lore:
+     - "&cCustom lore 1"
+     - "&6Custom lore 2"
+     - "&7Etc..."
