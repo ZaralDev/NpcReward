@@ -41,7 +41,7 @@ public class ItemRewardCommand implements CommandExecutor {
             Player target = (Player) sender;
             target.getInventory().addItem(pl.getSettings().getItemReward());
             target.sendMessage(Lang.ITEM_RECEIVED);
-            sender.sendMessage("Reward successfully sent !");
+            sender.sendMessage(ChatColor.GREEN + "Reward successfully sent !");
         }
 
 
