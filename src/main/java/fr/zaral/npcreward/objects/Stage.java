@@ -52,14 +52,13 @@ public class Stage {
 
     private boolean createPlinth(Location center, Player player) {
         World world = player.getWorld();
-        boolean cantPlace = false;
         Location plinthLoc = new Location(world, center.getBlockX(), center.getY() + 0, center.getBlockZ());
         Location perfectLoc = new Location(world, center.getBlockX() + 0.5, center.getY() + 1, center.getBlockZ() + 0.5);
         int xMin = plinthLoc.getBlockX() - 2;
         int xMax = plinthLoc.getBlockX() + 2;
         int zMin = plinthLoc.getBlockZ() - 2;
         int zMax = plinthLoc.getBlockZ() + 2;
-        int y = (int) plinthLoc.getBlockY();
+        int y = plinthLoc.getBlockY();
         List<Block> list = BlockUtils.getAllBlockInArea(xMin, xMax, zMin, zMax, y, player);
 
                 player.teleport(perfectLoc);
@@ -101,19 +100,19 @@ public class Stage {
                 switch (i) {
                     case (0):
                         player.playSound(a, Sound.NOTE_PLING, 1f, 1f);
-                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], a, pl.getSettings().getProfession());
+                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], a, pl.getSettings().getProfession(), player);
                         break;
                     case (1):
                         player.playSound(b, Sound.NOTE_PLING, 1f, 1f);
-                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], b, pl.getSettings().getProfession());
+                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], b, pl.getSettings().getProfession(), player);
                         break;
                     case (2):
                         player.playSound(c, Sound.NOTE_PLING, 1f, 1f);
-                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], c, pl.getSettings().getProfession());
+                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], c, pl.getSettings().getProfession(), player);
                         break;
                     case (3):
                         player.playSound(d, Sound.NOTE_PLING, 1f, 1f);
-                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], d, pl.getSettings().getProfession());
+                        pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], d, pl.getSettings().getProfession(), player);
                         break;
                     case (4):
 
