@@ -33,6 +33,14 @@ public class StageManager {
         this.pl = pl;
     }
 
+    public Stage isInStage(Player player) {
+        for (Stage stage : stageList) {
+            if (player.equals(stage.getPlayer())) {
+                return stage;
+            }
+        }
+        return null;
+    }
     private boolean startNewStage(Player player, @Nullable CommandSender sender) {
         World world = player.getWorld();
         Location center = player.getLocation();
