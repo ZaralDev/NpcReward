@@ -39,7 +39,9 @@ public class ItemRewardCommand implements CommandExecutor {
             sender.sendMessage(Lang.ITEM_RECEIVED);
         } else {
             Player target = (Player) sender;
-
+            target.getInventory().addItem(pl.getSettings().getItemReward());
+            target.sendMessage(Lang.ITEM_RECEIVED);
+            sender.sendMessage("Reward successfully sent !");
         }
 
 
