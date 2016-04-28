@@ -19,6 +19,11 @@ public class Lang {
         config = langConfig.getConfig();
         NOPERM = config.getString("NoPermission");
         ITEM_RECEIVED = config.getString("ItemRewardReceived");
+        NOSPACE = config.getString("NotEnoughtSpace");
+        PLAYERSNEARBY = config.getString("PlayerNearby");
+        SENDERPLAYERSNEARBY = config.getString("SenderPlayerNearby");
+        SENDERNOSPACE = config.getString("SenderNotEnoughtSpace");
+
     }
 
     public static void reloadConfig() {
@@ -28,6 +33,10 @@ public class Lang {
 
     public static String NOPERM;
     public static String ITEM_RECEIVED;
+    public static String NOSPACE;
+    public static String PLAYERSNEARBY;
+    public static String SENDERNOSPACE;
+    public static String SENDERPLAYERSNEARBY;
 
 
 

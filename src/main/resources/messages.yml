@@ -1,2 +1,6 @@
-NoPermission: "You don't have the permission !"
-ItemRewardReceived: "You received a gift !"
+NoPermission: "&cYou don't have the permission !"
+ItemRewardReceived: "&aYou received a gift !"
+NotEnoughtSpace: "&cthere is not enough space"
+PlayerNearby: "&cToo many players around yourself !"
+SenderNotEnogutSpace: "&cToo many players around the target !"
+SenderPlayerNearby: "&cToo many players around the target !"
