@@ -108,8 +108,7 @@ public class StageManager {
                     }
                 }
             }
-            Stage stage = new Stage(player);
-            stageList.add(stage);
+            stageList.add(new Stage(player));
         }
     }
 }
