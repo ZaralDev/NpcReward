@@ -28,22 +28,25 @@ public class Npc {
     private LivingEntity entity = null;
     @Getter
     private Villager.Profession profession = null;
-
+    @Getter
+    private Player target = null;
     private NpcManager npcManager;
 
 
-    public Npc(NpcManager npcManager, String name, Location spawnLocation, Villager.Profession profession) {
+    public Npc(NpcManager npcManager, String name, Location spawnLocation, Villager.Profession profession, Player target) {
         this.name = name;
         this.location = spawnLocation;
         this.profession = profession;
         this.npcManager = npcManager;
+        this.target = target;
         npcManager.getNpcList().add(this);
     }
 
-    public Npc(NpcManager npcManager, String name, Location spawnLocation) {
+    public Npc(NpcManager npcManager, String name, Location spawnLocation, Player target) {
         this.name = name;
         this.location = spawnLocation;
         this.npcManager = npcManager;
+        this.target = target;
         npcManager.getNpcList().add(this);
 
 
@@ -87,6 +90,7 @@ public class Npc {
             entity.setCustomName(ChatColor.translateAlternateColorCodes('&', name));
             entity.setCustomNameVisible(true);
             entity.teleport(location);
+            ((Villager) entity).setTarget(target);
             freezeEntity(entity);
             silentEntity(entity);
             isSpawn = true;
