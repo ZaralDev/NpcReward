@@ -33,7 +33,6 @@ public class PlayerListener implements Listener {
                 pl.getStageManager().newStage(player, null, true);
             }
         }
-
     }
 
 }

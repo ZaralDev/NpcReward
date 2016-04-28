@@ -1,6 +1,7 @@
 package fr.zaral.npcreward;
 
 import fr.zaral.npcreward.commands.CommandManager;
+import fr.zaral.npcreward.listeners.ListenerManager;
 import fr.zaral.npcreward.npc.NpcManager;
 import fr.zaral.npcreward.objects.StageManager;
 import fr.zaral.npcreward.utils.CodeUtils;
@@ -34,6 +35,10 @@ public class NpcReward extends JavaPlugin {
 
         CodeUtils.logToConsole("Loading commands");
         new CommandManager(this);
+
+        CodeUtils.logToConsole("Loading listeners");
+        new ListenerManager(this);
+
         CodeUtils.logToConsole("Loading Stage Manager");
         stageManager = new StageManager(this);
 
