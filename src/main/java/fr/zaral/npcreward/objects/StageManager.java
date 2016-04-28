@@ -17,7 +17,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.zaral.npcreward.utils.BlockUtils.getAllBlockInArea;
 import static fr.zaral.npcreward.utils.BlockUtils.getAllBlockInAreaByType;
 
 /**

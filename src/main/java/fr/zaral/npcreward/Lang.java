@@ -9,6 +9,14 @@ import org.bukkit.configuration.file.FileConfiguration;
  */
 public class Lang {
 
+    public static String NOPERM;
+    public static String ITEM_RECEIVED;
+    public static String NOSPACE;
+    public static String PLAYERSNEARBY;
+    public static String SENDERNOSPACE;
+    public static String SENDERPLAYERSNEARBY;
+    public static String TITLE;
+    public static String SUBTITLE;
     private static ConfigAccessor langConfig = null;
     private static FileConfiguration config = null;
 
@@ -23,6 +31,8 @@ public class Lang {
         PLAYERSNEARBY = config.getString("PlayerNearby");
         SENDERPLAYERSNEARBY = config.getString("SenderPlayerNearby");
         SENDERNOSPACE = config.getString("SenderNotEnoughtSpace");
+        TITLE = config.getString("Title");
+        SUBTITLE = config.getString("Subtitle");
 
     }
 
@@ -30,14 +40,6 @@ public class Lang {
         langConfig.reloadConfig();
         initMessages();
     }
-
-    public static String NOPERM;
-    public static String ITEM_RECEIVED;
-    public static String NOSPACE;
-    public static String PLAYERSNEARBY;
-    public static String SENDERNOSPACE;
-    public static String SENDERPLAYERSNEARBY;
-
 
 
 }

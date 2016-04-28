@@ -6,3 +6,13 @@ CustomItem:
      - "&cCustom lore 1"
      - "&6Custom lore 2"
      - "&7Etc..."
+
+# You can choose : BLACKSMITH - BUTCHER - FARMER - LIBRARIAN - PRIEST
+NpcType: "BLACKSMITH"
+
+# /!\ Don't set same names !
+CustomNames:
+    name1: "&6Steve"
+    name2: "&6Zaral"
+    name3: "&6Notch"
+    name4: "&6Kim"

@@ -2,6 +2,7 @@ package fr.zaral.npcreward;
 
 import fr.zaral.npcreward.commands.CommandManager;
 import fr.zaral.npcreward.npc.NpcManager;
+import fr.zaral.npcreward.objects.StageManager;
 import fr.zaral.npcreward.utils.CodeUtils;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +18,8 @@ public class NpcReward extends JavaPlugin {
     private NpcManager npcManager;
     @Getter
     private Settings settings;
+    @Getter
+    private StageManager stageManager;
 
     @Override
     public void onEnable() {
@@ -31,6 +34,8 @@ public class NpcReward extends JavaPlugin {
 
         CodeUtils.logToConsole("Loading commands");
         new CommandManager(this);
+        CodeUtils.logToConsole("Loading Stage Manager");
+        stageManager = new StageManager(this);
 
 
     }
