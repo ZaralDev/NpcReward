@@ -18,5 +18,6 @@ public class ListenerManager {
     private void load() {
         Bukkit.getPluginManager().registerEvents(new BlockListener(pl), pl);
         Bukkit.getPluginManager().registerEvents(new PlayerListener(pl), pl);
+        Bukkit.getPluginManager().registerEvents(new EntityListener(pl), pl);
     }
 }
