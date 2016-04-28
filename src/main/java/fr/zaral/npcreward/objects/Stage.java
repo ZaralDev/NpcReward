@@ -48,12 +48,14 @@ public class Stage {
 
     private void startStage() {
         freezePlayer();
+        createPlinth();
+        spawnPnj();
     }
 
-    private boolean createPlinth(Location center, Player player) {
+    private boolean createPlinth() {
         World world = player.getWorld();
-        Location plinthLoc = new Location(world, center.getBlockX(), center.getY() + 0, center.getBlockZ());
-        Location perfectLoc = new Location(world, center.getBlockX() + 0.5, center.getY() + 1, center.getBlockZ() + 0.5);
+        Location plinthLoc = new Location(world, location.getBlockX(), location.getY() + 0, location.getBlockZ());
+        Location perfectLoc = new Location(world, location.getBlockX() + 0.5, location.getY() + 1, location.getBlockZ() + 0.5);
         int xMin = plinthLoc.getBlockX() - 2;
         int xMax = plinthLoc.getBlockX() + 2;
         int zMin = plinthLoc.getBlockZ() - 2;
