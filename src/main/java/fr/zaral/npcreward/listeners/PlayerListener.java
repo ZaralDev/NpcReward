@@ -37,7 +37,9 @@ public class PlayerListener implements Listener {
             } else if (clicked != null && clicked.hasItemMeta()) {
                 if (clicked.equals(pl.getSettings().getItemReward())) {
                     event.setCancelled(true);
-                    pl.getStageManager().newStage(player, null, true);
+                    if (player.hasPermission("npcreward.item.use")) {
+                        pl.getStageManager().newStage(player, null, true);
+                    }
                 }
             }
         }

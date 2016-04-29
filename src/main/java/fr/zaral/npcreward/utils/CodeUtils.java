@@ -32,4 +32,8 @@ public class CodeUtils {
         rewardItem.setItemMeta(itemMeta);
         return rewardItem;
     }
+
+    public static void runConsoleCommand(String command) {
+        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
+    }
 }

@@ -28,6 +28,8 @@ public class StageManager {
 
     @Getter
     private ArrayList<Stage> stageList = new ArrayList<Stage>();
+    @Getter
+    private ArrayList<Stage> rewardList = new ArrayList<Stage>();
 
     public StageManager(NpcReward pl) {
         this.pl = pl;
