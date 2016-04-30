@@ -32,7 +32,7 @@ public class Reward {
         this.itemList = itemList;
     }
 
-    private void setReward(Player player) {
+    public void setReward(Player player) {
         for (String item : itemList) {
             String[] itemSplit = item.split(" ");
             if (itemSplit[1] == null) {
