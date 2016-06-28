@@ -2,6 +2,7 @@ package fr.zaral.npcreward.objects;
 
 import fr.zaral.npcreward.Lang;
 import fr.zaral.npcreward.NpcReward;
+import fr.zaral.npcreward.Settings;
 import fr.zaral.npcreward.lib.TitlesLib;
 import fr.zaral.npcreward.npc.Npc;
 import fr.zaral.npcreward.utils.BlockUtils;
@@ -31,10 +32,13 @@ public class Stage {
     private ArrayList<Npc> npc = new ArrayList<Npc>();
     @Getter
     private boolean canPick = false;
-
+    @Getter
+    private int pickLeft;
+    
     public Stage(Player player) {
         this.player = player;
         this.location = player.getLocation();
+        this.pickLeft = Settings.get().getMaxPick();
         startStage();
     }
 
@@ -61,6 +65,16 @@ public class Stage {
         }
         return false;
     }
+    
+    public void pick() {
+    	pickLeft--;
+    	if (pickLeft == 0) {
+    		//TODO end
+    	} else {
+    		player.sendMessage(Lang.PICKLEFT.replaceAll("%p", pickLeft + ""));
+    	}
+    }
+    
     private boolean createPlinth() {
         World world = player.getWorld();
         Location plinthLoc = new Location(world, location.getBlockX(), location.getY() + 0, location.getBlockZ());

@@ -2,6 +2,8 @@ package fr.zaral.npcreward;
 
 import fr.zaral.npcreward.utils.CodeUtils;
 import fr.zaral.npcreward.utils.ConfigAccessor;
+
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
@@ -17,6 +19,7 @@ public class Lang {
     public static String SENDERPLAYERSNEARBY;
     public static String TITLE;
     public static String SUBTITLE;
+    public static String PICKLEFT;
     private static ConfigAccessor langConfig = null;
     private static FileConfiguration config = null;
 
@@ -25,19 +28,24 @@ public class Lang {
         langConfig = new ConfigAccessor(NpcReward.getInstance(), "messages.yml");
         langConfig.saveDefaultConfig();
         config = langConfig.getConfig();
-        NOPERM = config.getString("NoPermission");
-        ITEM_RECEIVED = config.getString("ItemRewardReceived");
-        NOSPACE = config.getString("NotEnoughtSpace");
-        PLAYERSNEARBY = config.getString("PlayerNearby");
-        SENDERPLAYERSNEARBY = config.getString("SenderPlayerNearby");
-        SENDERNOSPACE = config.getString("SenderNotEnoughtSpace");
-        TITLE = config.getString("Title");
-        SUBTITLE = config.getString("Subtitle");
+        NOPERM = translateColor(config.getString("NoPermission"));
+        ITEM_RECEIVED = translateColor(config.getString("ItemRewardReceived"));
+        NOSPACE = translateColor(config.getString("NotEnoughtSpace"));
+        PLAYERSNEARBY = translateColor(config.getString("PlayerNearby"));
+        SENDERPLAYERSNEARBY = translateColor(config.getString("SenderPlayerNearby"));
+        SENDERNOSPACE = translateColor(config.getString("SenderNotEnoughtSpace"));
+        TITLE = translateColor(config.getString("Title"));
+        SUBTITLE = translateColor(config.getString("Subtitle"));
+        PICKLEFT = translateColor(config.getString("PickLeft"));
     }
 
     public static void reloadConfig() {
         langConfig.reloadConfig();
         initMessages();
+    }
+    
+    private static String translateColor(String msg) {
+    	return ChatColor.translateAlternateColorCodes('&', msg);
     }
 
 

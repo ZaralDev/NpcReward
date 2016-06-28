@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class Settings {
 
+	private static Settings settings = null;
     private NpcReward pl;
     private FileConfiguration config;
 
@@ -20,13 +21,20 @@ public class Settings {
     private ItemStack itemReward = null;
 
     @Getter
+    private int maxPick = 2;
+    @Getter
     private Villager.Profession profession = null;
 
     @Getter
     private String[] npcNames = new String[3];
 
+    public static Settings get() {
+    	if (settings == null) return new Settings(NpcReward.getInstance());
+    	return settings;
+    }
     public Settings(NpcReward pl) {
         this.pl = pl;
+        
         load();
     }
 
@@ -46,9 +54,8 @@ public class Settings {
         npcNames[1] = config.getString("CustomNames.name2").replace("&", "§");
         npcNames[2] = config.getString("CustomNames.name3").replace("&", "§");
         npcNames[3] = config.getString("CustomNames.name4").replace("&", "§");
-
         profession = Villager.Profession.valueOf(config.getString("NpcType"));
-
+        maxPick = config.getInt("MaxPick");
     }
 
 
