@@ -76,7 +76,6 @@ public class Stage {
 		player.playSound(location, Sound.ORB_PICKUP, 1f, 1f);
 
     	if (pickLeft == 0) {
-    		//TODO end
     		removeStage();
     	} else {
     		player.sendMessage(Lang.PICKLEFT.replaceAll("%p", pickLeft + ""));
