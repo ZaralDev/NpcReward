@@ -45,6 +45,7 @@ public class Lang {
     }
     
     private static String translateColor(String msg) {
+    	if (msg == null) return null;
     	return ChatColor.translateAlternateColorCodes('&', msg);
     }
 

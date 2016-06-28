@@ -26,7 +26,7 @@ public class Settings {
     private Villager.Profession profession = null;
 
     @Getter
-    private String[] npcNames = new String[3];
+    private String[] npcNames = new String[4];
 
     public static Settings get() {
     	if (settings == null) return new Settings(NpcReward.getInstance());
@@ -48,7 +48,8 @@ public class Settings {
         for (int i = 0; i < lore.size(); i++) {
             lore.get(i).replace("&", "§");
         }
-        CodeUtils.createItemStack(config.getString("CustomItem.Type"), config.getString("CustomItem.Name").replace("&", "§"), lore);
+        //TODO item
+        itemReward = CodeUtils.createItemStack(config.getString("CustomItem.Type"), config.getString("CustomItem.Name").replace("&", "§"), lore);
 
         npcNames[0] = config.getString("CustomNames.name1").replace("&", "§");
         npcNames[1] = config.getString("CustomNames.name2").replace("&", "§");
