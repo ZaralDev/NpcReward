@@ -2,7 +2,6 @@ package fr.zaral.npcreward.objects;
 
 import fr.zaral.npcreward.utils.CodeUtils;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -37,18 +36,10 @@ public class Reward {
             String[] itemSplit = item.split(" ");
             if (itemSplit[1] == null) {
                 ItemStack itemStack = new ItemStack(Material.getMaterial(itemSplit[0]));
-                if (itemStack == null) {
-                    player.sendMessage(ChatColor.RED + "[NpcReward] An error occurred please contact an Administrator");
-                    return;
-                } else
-                    player.getInventory().addItem(itemStack);
+                player.getInventory().addItem(itemStack);
             } else {
                 ItemStack itemStack = new ItemStack(Material.getMaterial(itemSplit[0]), Integer.parseInt(itemSplit[1]));
-                if (itemStack == null) {
-                    player.sendMessage(ChatColor.RED + "[NpcReward] An error occurred please contact an Administrator");
-                    return;
-                } else
-                    player.getInventory().addItem(itemStack);
+                player.getInventory().addItem(itemStack);
             }
         }
 

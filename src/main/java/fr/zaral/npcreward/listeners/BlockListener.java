@@ -1,7 +1,6 @@
 package fr.zaral.npcreward.listeners;
 
 import fr.zaral.npcreward.NpcReward;
-import fr.zaral.npcreward.objects.Stage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -35,7 +35,8 @@ public class Settings {
         config = pl.getConfig();
 
 
-        List<String> lore = (List<String>) config.getList("CustomItem.Lore");
+        @SuppressWarnings("unchecked")
+		List<String> lore = (List<String>) config.getList("CustomItem.Lore");
         for (int i = 0; i < lore.size(); i++) {
             lore.get(i).replace("&", "§");
         }

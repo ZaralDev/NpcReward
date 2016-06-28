@@ -76,7 +76,8 @@ public class Stage {
                 BlockUtils.replaceBlock(list, Material.SMOOTH_BRICK);
                 blocklist.addAll(list);
                 Bukkit.getScheduler().runTaskLater(NpcReward.getInstance(), new Runnable() {
-                    @Override
+                    @SuppressWarnings("deprecation")
+					@Override
                     public void run() {
                         world.getBlockAt(new Location(world, plinthLoc.getBlockX() + 1, plinthLoc.getY(), plinthLoc.getBlockZ())).setData((byte) 1);
                         world.getBlockAt(new Location(world, plinthLoc.getBlockX(), plinthLoc.getY(), plinthLoc.getBlockZ() - 1)).setData((byte) 1);
