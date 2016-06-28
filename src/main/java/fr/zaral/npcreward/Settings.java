@@ -48,7 +48,6 @@ public class Settings {
         for (int i = 0; i < lore.size(); i++) {
             lore.get(i).replace("&", "§");
         }
-        //TODO item
         itemReward = CodeUtils.createItemStack(config.getString("CustomItem.Type"), config.getString("CustomItem.Name").replace("&", "§"), lore);
 
         npcNames[0] = config.getString("CustomNames.name1").replace("&", "§");
