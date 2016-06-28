@@ -2,6 +2,9 @@ package fr.zaral.npcreward.objects;
 
 import fr.zaral.npcreward.utils.CodeUtils;
 import lombok.Getter;
+import net.md_5.bungee.api.ChatColor;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -17,18 +20,19 @@ public class Reward {
     @Getter
     private String name;
     @Getter
-    private boolean rare = false;
-    @Getter
     private List<String> command = new ArrayList<String>();
     @Getter
     private List<String> itemList = new ArrayList<String>();
-
-    //TODO Send message when a player get reward
-    public Reward(String rewardName, boolean rare, List<String> commandList, List<String> itemList) {
+    @Getter
+    private String privateMsg, globalMsg;
+    
+    public Reward(String rewardName, List<String> commandList, List<String> itemList
+    		, String globalMessage, String privateMessage) {
         this.name = rewardName;
-        this.rare = rare;
         this.command = commandList;
         this.itemList = itemList;
+        this.privateMsg = globalMessage;
+        this.globalMsg = globalMessage;
     }
 
     public void setReward(Player player) {
@@ -44,7 +48,13 @@ public class Reward {
         }
 
         for (String cmd : command) {
-            CodeUtils.runConsoleCommand(cmd.replaceAll("%p", player.getName()));
+            CodeUtils.runConsoleCommand(ChatColor.translateAlternateColorCodes('&', cmd.replaceAll("%p", player.getName()).replaceAll("%n", this.name)));
+        }
+        if (globalMsg != null && !globalMsg.equals("")) {
+        	Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', this.globalMsg.replaceAll("%p", player.getName()).replaceAll("%n", this.name)));
+        }
+        if (privateMsg != null && !privateMsg.equals("")) {
+        	player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.privateMsg.replaceAll("%p", player.getName()).replaceAll("%n", this.name)));
         }
     }
 }

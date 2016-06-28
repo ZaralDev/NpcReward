@@ -3,6 +3,7 @@ package fr.zaral.npcreward;
 import fr.zaral.npcreward.commands.CommandManager;
 import fr.zaral.npcreward.listeners.ListenerManager;
 import fr.zaral.npcreward.npc.NpcManager;
+import fr.zaral.npcreward.objects.RewardManager;
 import fr.zaral.npcreward.objects.StageManager;
 import fr.zaral.npcreward.utils.CodeUtils;
 import lombok.Getter;
@@ -30,18 +31,20 @@ public class NpcReward extends JavaPlugin {
 
         CodeUtils.logToConsole("Loading settings...");
         settings = new Settings(this);
-        CodeUtils.logToConsole("Loading messages");
+        CodeUtils.logToConsole("Loading messages...");
         Lang.initMessages();
 
-        CodeUtils.logToConsole("Loading commands");
+        CodeUtils.logToConsole("Loading commands...");
         new CommandManager(this);
 
-        CodeUtils.logToConsole("Loading listeners");
+        CodeUtils.logToConsole("Loading listeners...");
         new ListenerManager(this);
 
-        CodeUtils.logToConsole("Loading Stage Manager");
+        CodeUtils.logToConsole("Loading Stage Manager...");
         stageManager = new StageManager(this);
-
+        
+        CodeUtils.logToConsole("Loading Rewards...");
+        RewardManager.get().loadRewards();
 
     }
 
