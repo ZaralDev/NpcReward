@@ -1,6 +1,7 @@
 package fr.zaral.npcreward.listeners;
 
-import fr.zaral.npcreward.NpcReward;
+import fr.zaral.npcreward.objects.StageManager;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,16 +13,14 @@ import org.bukkit.event.block.BlockPlaceEvent;
  */
 public class BlockListener implements Listener {
 
-    private NpcReward pl;
 
-    public BlockListener(NpcReward pl) {
-        this.pl = pl;
+    public BlockListener() {
     }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if (pl.getStageManager().isInStage(player) != null) {
+        if (StageManager.get().isInStage(player) != null) {
             event.setCancelled(true);
         }
     }
@@ -29,7 +28,7 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        if (pl.getStageManager().isInStage(player) != null) {
+        if (StageManager.get().isInStage(player) != null) {
             event.setCancelled(true);
         }
     }

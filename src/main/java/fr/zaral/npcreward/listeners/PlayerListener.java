@@ -2,7 +2,10 @@ package fr.zaral.npcreward.listeners;
 
 import fr.zaral.npcreward.NpcReward;
 import fr.zaral.npcreward.npc.Npc;
+import fr.zaral.npcreward.npc.NpcManager;
 import fr.zaral.npcreward.objects.Stage;
+import fr.zaral.npcreward.objects.StageManager;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -27,7 +30,8 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        Stage stage = pl.getStageManager().isInStage(player);
+        StageManager sm = StageManager.get();
+        Stage stage =  sm.isInStage(player);
         ItemStack clicked = event.getItem();
         Action action = event.getAction();
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
@@ -38,7 +42,7 @@ public class PlayerListener implements Listener {
                 if (clicked.equals(pl.getSettings().getItemReward())) {
                     event.setCancelled(true);
                     if (player.hasPermission("npcreward.item.use")) {
-                        pl.getStageManager().newStage(player, null, true);
+                    	sm.newStage(player, null, true);
                     }
                 }
             }
@@ -48,14 +52,15 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerInteractAtEntity(PlayerInteractEntityEvent event ) {
         Player player = event.getPlayer();
-        Stage stage = pl.getStageManager().isInStage(player);
+        Stage stage = StageManager.get().isInStage(player);
         Entity clicked = event.getRightClicked();
         if (stage != null) {
             event.setCancelled(true);
             if (clicked instanceof Villager) {
-                Npc npc = pl.getNpcManager().getNpc(clicked.getName(), player);
+                Npc npc = NpcManager.get().getNpc(clicked.getName(), player);
                 if (npc != null && stage.containsNpc(npc) && stage.isCanPick()) {
                     //todo Reward
+                	stage.pick(npc);
                 }
             }
         }

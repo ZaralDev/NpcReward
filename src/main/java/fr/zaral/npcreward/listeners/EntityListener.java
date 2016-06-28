@@ -1,6 +1,8 @@
 package fr.zaral.npcreward.listeners;
 
 import fr.zaral.npcreward.NpcReward;
+import fr.zaral.npcreward.objects.StageManager;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +25,7 @@ public class EntityListener implements Listener {
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            if (pl.getStageManager().isInStage(player) != null) {
+            if (StageManager.get().isInStage(player) != null) {
                 event.setCancelled(true);
             }
         } else if (event.getEntity().getType().equals(EntityType.VILLAGER)) {
@@ -39,7 +41,7 @@ public class EntityListener implements Listener {
     public void onEntityFight(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
             Player player = (Player)event.getDamager();
-            if (pl.getStageManager().isInStage(player) != null) {
+            if (StageManager.get().isInStage(player) != null) {
                 event.setCancelled(true);
             }
         }

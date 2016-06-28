@@ -24,15 +24,19 @@ import static fr.zaral.npcreward.utils.BlockUtils.getAllBlockInAreaByType;
  */
 public class StageManager {
 
-    private NpcReward pl;
-
+	private static StageManager instance;
     @Getter
     private ArrayList<Stage> stageList = new ArrayList<Stage>();
     @Getter
     private ArrayList<Reward> rewardList = new ArrayList<Reward>();
 
-    public StageManager(NpcReward pl) {
-        this.pl = pl;
+    public static StageManager get() {
+    	if (instance == null) return new StageManager();
+    	return instance;
+    }
+    
+    public StageManager() {
+    	instance = this;
     }
 
     public Stage isInStage(Player player) {
@@ -112,5 +116,11 @@ public class StageManager {
             }
             stageList.add(new Stage(player));
         }
+    }
+    
+    public void removeStage(Stage stage) {
+    	if (stageList.contains(stage)) {
+    		this.stageList.remove(stage);
+    	}
     }
 }

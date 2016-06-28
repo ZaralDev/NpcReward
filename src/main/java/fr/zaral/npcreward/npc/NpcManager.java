@@ -1,6 +1,5 @@
 package fr.zaral.npcreward.npc;
 
-import fr.zaral.npcreward.NpcReward;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -13,15 +12,19 @@ import java.util.ArrayList;
  */
 public class NpcManager {
 
-    private NpcReward pl;
-
+	private static NpcManager instance;
+	
+	public static NpcManager get() {
+		if (instance == null) return new NpcManager();
+		return instance;
+	}
+	
+	public NpcManager() {
+		instance = this;
+	}
+	
     @Getter
     private ArrayList<Npc> npcList = new ArrayList<>();
-
-
-    public NpcManager(NpcReward pl) {
-        this.pl = pl;
-    }
 
     public Npc  spawnNpc(String name, Location location, Villager.Profession profession, Player target) {
         return new Npc(this, name, location, profession, target);

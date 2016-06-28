@@ -2,7 +2,6 @@ package fr.zaral.npcreward;
 
 import fr.zaral.npcreward.commands.CommandManager;
 import fr.zaral.npcreward.listeners.ListenerManager;
-import fr.zaral.npcreward.npc.NpcManager;
 import fr.zaral.npcreward.objects.RewardManager;
 import fr.zaral.npcreward.objects.StageManager;
 import fr.zaral.npcreward.utils.CodeUtils;
@@ -17,17 +16,13 @@ public class NpcReward extends JavaPlugin {
     @Getter
     private static NpcReward instance;
     @Getter
-    private NpcManager npcManager;
-    @Getter
     private Settings settings;
-    @Getter
-    private StageManager stageManager;
 
     @Override
     public void onEnable() {
         CodeUtils.logToConsole("Loading plugin...");
         instance = this;
-        npcManager = new NpcManager(this);
+       	
 
         CodeUtils.logToConsole("Loading settings...");
         settings = new Settings(this);
@@ -41,7 +36,7 @@ public class NpcReward extends JavaPlugin {
         new ListenerManager(this);
 
         CodeUtils.logToConsole("Loading Stage Manager...");
-        stageManager = new StageManager(this);
+        StageManager.get();
         
         CodeUtils.logToConsole("Loading Rewards...");
         RewardManager.get().loadRewards();

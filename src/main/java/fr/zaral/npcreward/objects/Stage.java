@@ -5,6 +5,7 @@ import fr.zaral.npcreward.NpcReward;
 import fr.zaral.npcreward.Settings;
 import fr.zaral.npcreward.lib.TitlesLib;
 import fr.zaral.npcreward.npc.Npc;
+import fr.zaral.npcreward.npc.NpcManager;
 import fr.zaral.npcreward.utils.BlockUtils;
 import lombok.Getter;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
@@ -66,10 +67,17 @@ public class Stage {
         return false;
     }
     
-    public void pick() {
+    public void pick(Npc npcc) {
     	pickLeft--;
+    	Reward reward = RewardManager.get().getRandomReward();
+    	reward.setReward(this.player);
+    	npc.remove(npcc);
+    	npcc.delete();
+		player.playSound(location, Sound.ORB_PICKUP, 1f, 1f);
+
     	if (pickLeft == 0) {
     		//TODO end
+    		removeStage();
     	} else {
     		player.sendMessage(Lang.PICKLEFT.replaceAll("%p", pickLeft + ""));
     	}
@@ -110,10 +118,36 @@ public class Stage {
         return true;
     }
 
+    public void removeStage() {
+    	for (Npc npcList : npc) {
+    		Bukkit.getScheduler().runTaskLater(NpcReward.getInstance(), new Runnable() {
+				
+				@Override
+				public void run() {
+					player.playSound(location, Sound.ORB_PICKUP, 1f, 1f);
+		    		npcList.delete();
+				}
+			}, 20L * 1);
+    	}
+    	npc.clear();
+		Bukkit.getScheduler().runTaskLater(NpcReward.getInstance(), new Runnable() {
+			
+			@Override
+			public void run() {
+
+				BlockUtils.replaceBlock(blocklist, Material.AIR);
+				player.playSound(player.getLocation(), Sound.GLASS , 1f, 1f);
+			}
+		}, 20L * 5);
+		unfreezePlayer();
+		StageManager.get().removeStage(this);
+    }
+    
     int task = 6854;
     int i = 0;
     private void spawnPnj() {
-        NpcReward pl = NpcReward.getInstance();
+        NpcManager nm = NpcManager.get();
+        Settings sg = Settings.get();
         Location location = this.location;
         Location a = new Location(location.getWorld(), location.getBlockX() + 2.5, location.getBlockY() + 1, location.getBlockZ() + 0.5);
         Location b = new Location(location.getWorld(), location.getBlockX() +0.5 , location.getBlockY() + 1, location.getBlockZ() + 2.5);
@@ -126,19 +160,19 @@ public class Stage {
                 switch (i) {
                     case (0):
                         player.playSound(a, Sound.NOTE_PLING, 1f, 1f);
-                        npc.add(pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], a, pl.getSettings().getProfession(), player));
+                        npc.add(nm.spawnNpc(sg.getNpcNames()[i], a, sg.getProfession(), player));
                         break;
                     case (1):
                         player.playSound(b, Sound.NOTE_PLING, 1f, 1f);
-                        npc.add(pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], b, pl.getSettings().getProfession(), player));
+                        npc.add(nm.spawnNpc(sg.getNpcNames()[i], b, sg.getProfession(), player));
                         break;
                     case (2):
                         player.playSound(c, Sound.NOTE_PLING, 1f, 1f);
-                        npc.add(pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], c, pl.getSettings().getProfession(), player));
+                        npc.add(nm.spawnNpc(sg.getNpcNames()[i], c, sg.getProfession(), player));
                         break;
                     case (3):
                         player.playSound(d, Sound.NOTE_PLING, 1f, 1f);
-                        npc.add(pl.getNpcManager().spawnNpc(pl.getSettings().getNpcNames()[i], d, pl.getSettings().getProfession(), player));
+                        npc.add(nm.spawnNpc(sg.getNpcNames()[i], d, sg.getProfession(), player));
                         break;
                     case (4):
                         TitlesLib.sendTitle(player, PacketPlayOutTitle.EnumTitleAction.TITLE, Lang.TITLE, 20, 20, 20, ChatColor.RED);
