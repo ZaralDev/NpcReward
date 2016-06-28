@@ -54,7 +54,7 @@ public class PlayerListener implements Listener {
             event.setCancelled(true);
             if (clicked instanceof Villager) {
                 Npc npc = pl.getNpcManager().getNpc(clicked.getName(), player);
-                if (npc != null && stage.containsNpc(npc)) {
+                if (npc != null && stage.containsNpc(npc) && stage.isCanPick()) {
                     //todo Reward
                 }
             }
