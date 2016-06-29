@@ -70,8 +70,6 @@ public class Npc {
         double pitch = Math.asin((dY - pL.getY()) / location.distance(pL));
         if (yaw == 0) yaw = 180;
         else if (yaw == 180) yaw = 0;
-        System.out.print("yaw " + yaw);
-        System.out.print("p " + pitch);
 
         location.setYaw(new Double(yaw).floatValue());
         location.setPitch(new Double(pitch).floatValue());

@@ -64,6 +64,16 @@ public class Stage {
 		}
 		return null;
 	}
+	
+	public Npc getNpc(String name) {
+		for (Npc npcd : npc) {
+			if (npcd.getName().equals(name)) {
+				return npcd;
+			}
+		}
+		return null;
+	}
+
 
 	public void pick(Npc npcc) {
 		pickLeft--;

@@ -88,7 +88,7 @@ public class StageManager {
         return true;
     }
 
-    public void newStage(Player player, @Nullable CommandSender sender, boolean withItem) {
+    public boolean newStage(Player player, @Nullable CommandSender sender, boolean withItem) {
         if (startNewStage(player, sender)) {
             if (withItem) {
                 ItemStack item = null;
@@ -115,7 +115,9 @@ public class StageManager {
                 }
             }
             stageList.add(new Stage(player));
-        }
+            return true;
+        } 
+        return false;
     }
     
     public void removeStage(Stage stage) {

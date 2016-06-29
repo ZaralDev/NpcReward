@@ -3,6 +3,7 @@ package fr.zaral.npcreward;
 import fr.zaral.npcreward.utils.CodeUtils;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
 
@@ -51,7 +52,6 @@ public class Settings {
             lore.get(i).replace("&", "§");
         }
         itemReward = CodeUtils.createItemStack(config.getString("CustomItem.Type"), config.getString("CustomItem.Name").replace("&", "§"), lore);
-
         npcNames[0] = config.getString("CustomNames.name1").replace("&", "§");
         npcNames[1] = config.getString("CustomNames.name2").replace("&", "§");
         npcNames[2] = config.getString("CustomNames.name3").replace("&", "§");
@@ -60,6 +60,5 @@ public class Settings {
         maxPick = config.getInt("MaxPick");
         damageEnabledStage = config.getBoolean("DamageEnabledOnStage");
     }
-
-
+    
 }

@@ -6,7 +6,9 @@ import fr.zaral.npcreward.Settings;
 import fr.zaral.npcreward.npc.Npc;
 import fr.zaral.npcreward.objects.Stage;
 import fr.zaral.npcreward.objects.StageManager;
+import fr.zaral.npcreward.utils.PlayerUtils;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -19,6 +21,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 /**
  * Created by Zaral on 28/04/2016.
@@ -38,6 +41,25 @@ public class PlayerListener implements Listener {
 			if (event.getFrom().distance(event.getTo()) > 0.05) {
 				event.setTo(event.getFrom());
 			}
+		} else {
+			for (Stage i : StageManager.get().getStageList()) {
+				Location mainLoc = i.getLocation();
+				Location corner1 = new Location(mainLoc.getWorld(), mainLoc.getBlockX() + 4, mainLoc.getBlockY(), mainLoc.getBlockZ() +4 );
+				Location corner2 = new Location(mainLoc.getWorld(), mainLoc.getBlockX() - 4, mainLoc.getBlockY(), mainLoc.getBlockZ() -4 );
+				if (PlayerUtils.isInside(player.getLocation(), corner1, corner2)) {
+					double dX = player.getLocation().getX() - mainLoc.getX();
+					//double dY = player.getLocation().getY() - mainLoc.getY();
+					double dZ = player.getLocation().getZ() - mainLoc.getZ();
+					double yaw = - Math.atan2(dZ, dX) ;
+					double pitch = 2;
+					double x = Math.sin(pitch) * Math.cos(yaw);
+					double z = Math.sin(pitch) * Math.sin(yaw);
+					double y = Math.cos(pitch);
+					
+					Vector vector = new Vector(x, y, z);
+					player.setVelocity(vector.multiply(1.001));
+				}
+			}
 		}
 	}
 
@@ -54,20 +76,30 @@ public class PlayerListener implements Listener {
 				event.setCancelled(true);
 				return;
 			} else if (clicked != null && clicked.hasItemMeta()) {
-				if (clicked.equals(pl.getSettings().getItemReward())) {
+				if (clicked.getItemMeta().getDisplayName().equals(pl.getSettings().getItemReward().getItemMeta().getDisplayName())) {
+
 					event.setCancelled(true);
 					if (player.hasPermission("npcreward.item.use")) {
 						if (!player.isOnGround()) {
 							player.sendMessage(Lang.ISNOTONGROUND);
 							return;
 						}
-						sm.newStage(player, null, true);
+
+						if (sm.newStage(player, null, true)) {
+							if (player.getItemInHand().getAmount() != 1) {
+								player.getItemInHand().setAmount(player.getItemInHand().getAmount()-1);
+							} else {
+								player.setItemInHand(null);
+							}
+						}
+					} else {
+						player.sendMessage(Lang.NOPERM);
 					}
 				}
 			}
 		}
 	}
-	
+
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
@@ -90,9 +122,16 @@ public class PlayerListener implements Listener {
 					stage.pick(npc);
 				}
 			}
+		} else if (clicked instanceof Villager) {
+			for (String name : Settings.get().getNpcNames()) {
+				if (clicked.getName().equals(name)) {
+					event.setCancelled(true);
+
+				}
+			}
 		}
 	}
-	
+
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
