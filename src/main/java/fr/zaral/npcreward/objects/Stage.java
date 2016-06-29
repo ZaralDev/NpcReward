@@ -26,7 +26,6 @@ public class Stage {
     @Getter
     private Location location;
 
-    private float walkSpeed = 1;
     @Getter
     private ArrayList<Block> blocklist = new ArrayList<Block>();
     @Getter
@@ -43,17 +42,7 @@ public class Stage {
         startStage();
     }
 
-    private void freezePlayer() {
-        walkSpeed = player.getWalkSpeed();
-        player.setWalkSpeed(0);
-    }
-
-    private void unfreezePlayer() {
-        player.setWalkSpeed(walkSpeed);
-    }
-
     private void startStage() {
-        freezePlayer();
         createPlinth();
         spawnPnj();
     }
@@ -66,6 +55,15 @@ public class Stage {
         }
         return false;
     }
+    
+	public Npc getNpc(String name, Player target) {
+		for (Npc npcd : npc) {
+			if (npcd.getName().equals(name) && target.equals(npcd.getTarget())) {
+				return npcd;
+			}
+		}
+		return null;
+	}
     
     public void pick(Npc npcc) {
     	pickLeft--;
@@ -117,6 +115,9 @@ public class Stage {
         return true;
     }
 
+    public Stage getThis() {
+    	return this;
+    }
     public void removeStage() {
     	for (Npc npcList : npc) {
     		Bukkit.getScheduler().runTaskLater(NpcReward.getInstance(), new Runnable() {
@@ -136,10 +137,9 @@ public class Stage {
 
 				BlockUtils.replaceBlock(blocklist, Material.AIR);
 				player.playSound(player.getLocation(), Sound.GLASS , 1f, 1f);
+				StageManager.get().removeStage(getThis());
 			}
 		}, 20L * 5);
-		unfreezePlayer();
-		StageManager.get().removeStage(this);
     }
     
     int task = 6854;
@@ -181,6 +181,7 @@ public class Stage {
                         Bukkit.getScheduler().cancelTask(task);
                         break;
                 }
+                i++;
             }
         }, 20L * 2, 20L);
     }

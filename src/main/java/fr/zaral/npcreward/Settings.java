@@ -27,7 +27,9 @@ public class Settings {
 
     @Getter
     private String[] npcNames = new String[4];
-
+    
+    @Getter
+    private boolean damageEnabledStage = false;
     public static Settings get() {
     	if (settings == null) return new Settings(NpcReward.getInstance());
     	return settings;
@@ -56,6 +58,7 @@ public class Settings {
         npcNames[3] = config.getString("CustomNames.name4").replace("&", "§");
         profession = Villager.Profession.valueOf(config.getString("NpcType"));
         maxPick = config.getInt("MaxPick");
+        damageEnabledStage = config.getBoolean("DamageEnabledOnStage");
     }
 
 

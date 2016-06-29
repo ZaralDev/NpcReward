@@ -20,6 +20,7 @@ public class Lang {
     public static String TITLE;
     public static String SUBTITLE;
     public static String PICKLEFT;
+    public static String ISNOTONGROUND;
     private static ConfigAccessor langConfig = null;
     private static FileConfiguration config = null;
 
@@ -37,6 +38,8 @@ public class Lang {
         TITLE = translateColor(config.getString("Title"));
         SUBTITLE = translateColor(config.getString("Subtitle"));
         PICKLEFT = translateColor(config.getString("PickLeft"));
+        ISNOTONGROUND = translateColor(config.getString("IsNotOnGround"));
+
     }
 
     public static void reloadConfig() {

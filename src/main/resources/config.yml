@@ -18,3 +18,4 @@ CustomNames:
     name4: "&6Kim"
 
 MaxPick: 3
+DamageEnabledOnStage: false

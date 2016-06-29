@@ -45,7 +45,7 @@ public class RewardManager {
 	}
 	
 	public Reward getRandomReward() {
-		int random = CodeUtils.randomInt(0, rewardList.size());
+		int random = CodeUtils.randomInt(0, rewardList.size()-1);
 		return rewardList.get(random);
 	}
 	

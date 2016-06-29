@@ -27,24 +27,19 @@ public class Npc {
     private Villager.Profession profession = null;
     @Getter
     private Player target = null;
-    private NpcManager npcManager;
 
 
-    public Npc(NpcManager npcManager, String name, Location spawnLocation, Villager.Profession profession, Player target) {
+    public Npc(String name, Location spawnLocation, Villager.Profession profession, Player target) {
         this.name = name;
         this.location = spawnLocation;
         this.profession = profession;
-        this.npcManager = npcManager;
         this.target = target;
-        npcManager.getNpcList().add(this);
     }
 
-    public Npc(NpcManager npcManager, String name, Location spawnLocation, Player target) {
+    public Npc(String name, Location spawnLocation, Player target) {
         this.name = name;
         this.location = spawnLocation;
-        this.npcManager = npcManager;
         this.target = target;
-        npcManager.getNpcList().add(this);
 
 
     }
@@ -66,7 +61,20 @@ public class Npc {
     }
 
 
-    public void spawn() {
+    public void spawn(Player player) {
+        double dX = location.getX();
+        double dY = location.getY();
+        double dZ = location.getZ() ;
+        Location pL = player.getLocation();
+        double yaw = (Math.atan2((dX-pL.getX()),(dZ-pL.getZ()))*(180.0/Math.PI));
+        double pitch = Math.asin((dY - pL.getY()) / location.distance(pL));
+        if (yaw == 0) yaw = 180;
+        else if (yaw == 180) yaw = 0;
+        System.out.print("yaw " + yaw);
+        System.out.print("p " + pitch);
+
+        location.setYaw(new Double(yaw).floatValue());
+        location.setPitch(new Double(pitch).floatValue());
         if (!isSpawn) {
             entity = (LivingEntity) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
 
@@ -87,9 +95,10 @@ public class Npc {
             entity.setCustomName(ChatColor.translateAlternateColorCodes('&', name));
             entity.setCustomNameVisible(true);
             entity.teleport(location);
-            ((Villager) entity).setTarget(target);
             freezeEntity(entity);
             silentEntity(entity);
+           // CraftEntity.getEntity((CraftServer)NpcReward.getInstance().getServer(), (net.minecraft.server.v1_8_R3.Entity) entity).getHandle().set;
+
             isSpawn = true;
 
         }
@@ -109,13 +118,12 @@ public class Npc {
         if (isSpawn) {
             entity.remove();
             isSpawn = false;
-            npcManager.getNpcList().remove(this);
         }
     }
 
-    public void update() {
+    public void update(Player player) {
         if (!isSpawn)
-            spawn();
+            spawn(player);
         else {
             entity.teleport(location);
             entity.setCustomName(ChatColor.translateAlternateColorCodes('&', name));

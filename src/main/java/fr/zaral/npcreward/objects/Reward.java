@@ -31,7 +31,7 @@ public class Reward {
         this.name = rewardName;
         this.command = commandList;
         this.itemList = itemList;
-        this.privateMsg = globalMessage;
+        this.privateMsg = privateMessage;
         this.globalMsg = globalMessage;
     }
 
@@ -50,9 +50,11 @@ public class Reward {
         for (String cmd : command) {
             CodeUtils.runConsoleCommand(ChatColor.translateAlternateColorCodes('&', cmd.replaceAll("%p", player.getName()).replaceAll("%n", this.name)));
         }
+        
         if (globalMsg != null && !globalMsg.equals("")) {
         	Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', this.globalMsg.replaceAll("%p", player.getName()).replaceAll("%n", this.name)));
         }
+        
         if (privateMsg != null && !privateMsg.equals("")) {
         	player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.privateMsg.replaceAll("%p", player.getName()).replaceAll("%n", this.name)));
         }
