@@ -7,9 +7,8 @@ Reward:
         name: "Example reward"
         cmdList:
          - "money add %p 9000"
-         - "give %p 1 12"
         itemReward:
-         - "STONE 9"
+         - "GRAVEL 9"
         globalMessage: "&c%p Won a reward !"
         privateMessage: "&cYou got a good reward"
     2:

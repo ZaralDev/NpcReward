@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -56,7 +57,7 @@ public class PlayerListener implements Listener {
 				if (clicked.equals(pl.getSettings().getItemReward())) {
 					event.setCancelled(true);
 					if (player.hasPermission("npcreward.item.use")) {
-						if (player.isOnGround()) {
+						if (!player.isOnGround()) {
 							player.sendMessage(Lang.ISNOTONGROUND);
 							return;
 						}
@@ -64,6 +65,15 @@ public class PlayerListener implements Listener {
 					}
 				}
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerQuit(PlayerQuitEvent event) {
+		Player player = event.getPlayer();
+		Stage stage = StageManager.get().isInStage(player);
+		if (stage != null) {
+			stage.removeStageNoCd();
 		}
 	}
 

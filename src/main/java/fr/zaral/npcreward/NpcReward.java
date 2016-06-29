@@ -45,6 +45,8 @@ public class NpcReward extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+    	StageManager.get().getStageList().forEach(stage-> {
+    		stage.removeStageNoCd();
+    	});
     }
 }
