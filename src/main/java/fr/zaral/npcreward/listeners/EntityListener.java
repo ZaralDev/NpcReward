@@ -34,20 +34,23 @@ public class EntityListener implements Listener {
 			Entity entity = event.getEntity();
 			for (String name : pl.getSettings().getNpcNames()) {
 				if (name.equals(event.getEntity().getCustomName())) {
-					if (event instanceof EntityDamageByEntityEvent) {
+					if (event instanceof EntityDamageByEntityEvent ) {
 						EntityDamageByEntityEvent e = (EntityDamageByEntityEvent)event;
 						Entity damager = e.getDamager();
-						double dX = damager.getLocation().getX() - entity.getLocation().getX();
-						//double dY = player.getLocation().getY() - mainLoc.getY();
-						double dZ = damager.getLocation().getZ() - entity.getLocation().getZ();
-						double yaw = - Math.atan2(dZ, dX) ;
-						double pitch = 2;
-						double x = Math.sin(pitch) * Math.cos(yaw);
-						double z = Math.sin(pitch) * Math.sin(yaw);
-						double y = Math.cos(pitch);
+						if (!(damager instanceof Player)) {
+							double dX = damager.getLocation().getX() - entity.getLocation().getX();
+							//double dY = player.getLocation().getY() - mainLoc.getY();
+							double dZ = damager.getLocation().getZ() - entity.getLocation().getZ();
+							double yaw = - Math.atan2(dZ, dX) ;
+							double pitch = 2;
+							double x = Math.sin(pitch) * Math.cos(yaw);
+							double z = Math.sin(pitch) * Math.sin(yaw);
+							double y = Math.cos(pitch);
 
-						Vector vector = new Vector(x, y, z);
-						damager.setVelocity(vector.multiply(1.001));					}
+							Vector vector = new Vector(x, y, z);
+							damager.setVelocity(vector.multiply(2.001));	
+						}
+					}
 					event.setCancelled(true);
 				}
 			}
