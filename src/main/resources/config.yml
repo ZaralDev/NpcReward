@@ -19,3 +19,8 @@ CustomNames:
 
 MaxPick: 3
 DamageEnabledOnStage: false
+BlockOnGroundID: '43:4'
+Use2block: true
+PercentOfSecondBlock: 35
+SecondBlockID: '43:5'
+

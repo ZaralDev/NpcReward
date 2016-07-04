@@ -30,6 +30,16 @@ public class Settings {
     
     @Getter
     private boolean damageEnabledStage = false;
+    
+    @Getter
+    private boolean use2Blocks = false;
+    
+    @Getter
+    private String firstBlock, secondBlock;
+    
+    @Getter
+    private int percent;
+    
     public static Settings get() {
     	if (settings == null) return new Settings(NpcReward.getInstance());
     	return settings;
@@ -58,6 +68,13 @@ public class Settings {
         profession = Villager.Profession.valueOf(config.getString("NpcType"));
         maxPick = config.getInt("MaxPick");
         damageEnabledStage = config.getBoolean("DamageEnabledOnStage");
+        firstBlock = config.getString("BlockOnGroundID");
+        use2Blocks = config.getBoolean("Use2block");
+        if (use2Blocks) {
+        	percent = config.getInt("PercentOfSecondBlock");
+        	secondBlock = config.getString("SecondBlockID");
+        }
+        
     }
     
 }

@@ -64,7 +64,7 @@ public class Stage {
 		}
 		return null;
 	}
-	
+
 	public Npc getNpc(String name) {
 		for (Npc npcd : npc) {
 			if (npcd.getName().equals(name)) {
@@ -91,6 +91,7 @@ public class Stage {
 	}
 
 	private boolean createPlinth() {
+		Settings sg = Settings.get();
 		World world = player.getWorld();
 		Location plinthLoc = new Location(world, location.getBlockX(), location.getY() + 0, location.getBlockZ());
 		Location perfectLoc = new Location(world, location.getBlockX() + 0.5, location.getY() + 1, location.getBlockZ() + 0.5);
@@ -100,10 +101,28 @@ public class Stage {
 		int zMax = plinthLoc.getBlockZ() + 2;
 		int y = plinthLoc.getBlockY();
 		List<Block> list = BlockUtils.getAllBlockInArea(xMin, xMax, zMin, zMax, y, player);
-
 		player.teleport(perfectLoc);
-		BlockUtils.replaceBlock(list, Material.SMOOTH_BRICK);
+		String[] splitedFirst = sg.getFirstBlock().split(":");
+		Material firstMat = Material.getMaterial(splitedFirst[0]);
+		byte dataF = 0;
+		if (splitedFirst.length == 2) {
+			dataF = Byte.parseByte(splitedFirst[1]);
+		}
+		if (sg.isUse2Blocks()) {
+			String[] splitedSecond = sg.getSecondBlock().split(":");
+			Material secondMat = Material.getMaterial(splitedSecond[0]);
+			byte dataS = 0;
+			if (splitedSecond.length == 2) {
+				dataS = Byte.parseByte(splitedSecond[1]);
+			}
+			int percent = sg.getPercent();
+			BlockUtils.replaceBlock(list, firstMat, dataF, true, secondMat, dataS, percent);
+
+		} else {
+		BlockUtils.replaceBlock(list, firstMat, dataF, false, null, dataF, 0);
+		}
 		blocklist.addAll(list);
+		/*
 		Bukkit.getScheduler().runTaskLater(NpcReward.getInstance(), new Runnable() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -121,7 +140,7 @@ public class Stage {
 				world.getBlockAt(new Location(world, plinthLoc.getBlockX() - 1, plinthLoc.getY(), plinthLoc.getBlockZ() + 1)).setData((byte) 1);
 
 			}
-		}, 10L);
+		}, 10L);*/
 		return true;
 	}
 
@@ -145,7 +164,7 @@ public class Stage {
 			@Override
 			public void run() {
 
-				BlockUtils.replaceBlock(blocklist, Material.AIR);
+				BlockUtils.replaceAirBlock(blocklist);
 				player.playSound(player.getLocation(), Sound.GLASS , 1f, 1f);
 				StageManager.get().removeStage(getThis());
 			}
@@ -156,7 +175,7 @@ public class Stage {
 		for (Npc npcList : npc) {
 			npcList.delete();
 		}
-		BlockUtils.replaceBlock(blocklist, Material.AIR);
+		BlockUtils.replaceAirBlock(blocklist);
 	}
 
 	int task = 6854;
