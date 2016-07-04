@@ -60,6 +60,8 @@ public class StageManager {
         List<Block> checkBlock = getAllBlockInAreaByType(xMin, xMax, zMin, zMax, y, player);
         for (int i = 0 ; i < checkBlock.size() ; i++) {
             if (!checkBlock.get(i).getType().equals(Material.AIR)) {
+            	if (checkBlock.get(i).getType().equals(Material.LONG_GRASS))
+            		continue;
                 cantPlace = true;
             }
         }
