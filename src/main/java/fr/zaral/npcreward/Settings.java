@@ -3,7 +3,6 @@ package fr.zaral.npcreward;
 import fr.zaral.npcreward.utils.CodeUtils;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
 
