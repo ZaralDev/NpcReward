@@ -2,6 +2,8 @@ package fr.zaral.npcreward.commands;
 
 import fr.zaral.npcreward.Lang;
 import fr.zaral.npcreward.NpcReward;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -38,7 +40,7 @@ public class ItemRewardCommand implements CommandExecutor {
             ((Player)sender).getInventory().addItem(pl.getSettings().getItemReward());
             sender.sendMessage(Lang.ITEM_RECEIVED);
         } else {
-            Player target = (Player) sender;
+            Player target = Bukkit.getPlayer(args[1]);
             if (target != null) {
                 target.getInventory().addItem(pl.getSettings().getItemReward());
                 target.sendMessage(Lang.ITEM_RECEIVED);

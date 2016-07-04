@@ -1,6 +1,8 @@
 package fr.zaral.npcreward.commands;
 
 import fr.zaral.npcreward.Lang;
+import fr.zaral.npcreward.Settings;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,7 +21,8 @@ public class ReloadCommand implements CommandExecutor {
                 return true;
             }
             Lang.reloadConfig();
-            sender.sendMessage(ChatColor.GREEN + "[NpcReward] Messages have been relaoded !");
+            Settings.get().load();
+            sender.sendMessage(ChatColor.GREEN + "[NpcReward] All configurations have been reloaded!");
         }
         return true;
     }

@@ -50,7 +50,7 @@ public class Settings {
         load();
     }
 
-    private void load() {
+    public void load() {
         pl.saveDefaultConfig();
         config = pl.getConfig();
 
