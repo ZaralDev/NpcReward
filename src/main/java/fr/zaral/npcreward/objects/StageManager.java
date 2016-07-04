@@ -59,8 +59,9 @@ public class StageManager {
         int y = plinthLoc.getBlockY();
         List<Block> checkBlock = getAllBlockInAreaByType(xMin, xMax, zMin, zMax, y, player);
         for (int i = 0 ; i < checkBlock.size() ; i++) {
-            if (!checkBlock.get(i).getType().equals(Material.AIR)) {
-            	if (checkBlock.get(i).getType().equals(Material.LONG_GRASS))
+        	Material type = checkBlock.get(i).getType();
+            if (!type.equals(Material.AIR)) {
+            	if (type.equals(Material.LONG_GRASS) || type.equals(Material.YELLOW_FLOWER))
             		continue;
                 cantPlace = true;
             }

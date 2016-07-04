@@ -103,14 +103,14 @@ public class Stage {
 		List<Block> list = BlockUtils.getAllBlockInArea(xMin, xMax, zMin, zMax, y, player);
 		player.teleport(perfectLoc);
 		String[] splitedFirst = sg.getFirstBlock().split(":");
-		Material firstMat = Material.getMaterial(splitedFirst[0]);
+		int firstMat = Integer.parseInt(splitedFirst[0]);
 		byte dataF = 0;
 		if (splitedFirst.length == 2) {
 			dataF = Byte.parseByte(splitedFirst[1]);
 		}
 		if (sg.isUse2Blocks()) {
 			String[] splitedSecond = sg.getSecondBlock().split(":");
-			Material secondMat = Material.getMaterial(splitedSecond[0]);
+			int secondMat = Integer.parseInt(splitedSecond[0]);
 			byte dataS = 0;
 			if (splitedSecond.length == 2) {
 				dataS = Byte.parseByte(splitedSecond[1]);
@@ -119,7 +119,7 @@ public class Stage {
 			BlockUtils.replaceBlock(list, firstMat, dataF, true, secondMat, dataS, percent);
 
 		} else {
-		BlockUtils.replaceBlock(list, firstMat, dataF, false, null, dataF, 0);
+		BlockUtils.replaceBlock(list, firstMat, dataF, false, 0, dataF, 0);
 		}
 		blocklist.addAll(list);
 		/*

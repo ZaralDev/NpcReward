@@ -45,7 +45,7 @@ public class BlockUtils {
 		return list;
 	}
 
-	public static void replaceBlock(List<Block> list, Material type, byte data, boolean withSecondBlock,@Nullable Material secondType,
+	public static void replaceBlock(List<Block> list, int type, byte data, boolean withSecondBlock,@Nullable int secondType,
 			byte secondData, int percent) {
 		Bukkit.getServer().getScheduler().runTaskAsynchronously(NpcReward.getInstance(), new Runnable() {
 			@Override
@@ -57,15 +57,15 @@ public class BlockUtils {
 					public void run() {
 						if (!withSecondBlock) {
 							for (Block b : list) {
-								b.setTypeIdAndData(type.getId(), data, false);
+								b.setTypeIdAndData(type, data, false);
 							}
 						} else {
 							for (Block b : list) {
 								int num = CodeUtils.randomInt(0, 100);
 								if (num <= percent) {
-									b.setTypeIdAndData(secondType.getId(), secondData, false);
+									b.setTypeIdAndData(secondType, secondData, false);
 								} else {
-									b.setTypeIdAndData(type.getId(), data, false);
+									b.setTypeIdAndData(type, data, false);
 								}
 							}
 						}
