@@ -48,7 +48,7 @@ public class EntityListener implements Listener {
 							double y = Math.cos(pitch);
 
 							Vector vector = new Vector(x, y, z);
-							damager.setVelocity(vector.multiply(2.001));	
+							damager.setVelocity(vector.multiply(8));	
 						}
 					}
 					event.setCancelled(true);
