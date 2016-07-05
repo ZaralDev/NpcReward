@@ -14,6 +14,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,6 +35,8 @@ public class Stage {
 	private boolean canPick = false;
 	@Getter
 	private int pickLeft;
+	@Getter
+	private HashMap<Npc, Particule> particuleList = new HashMap<Npc, Particule>();
 
 	public Stage(Player player) {
 		this.player = player;
@@ -79,6 +82,7 @@ public class Stage {
 		pickLeft--;
 		Reward reward = RewardManager.get().getRandomReward();
 		reward.setReward(this.player);
+		particuleList.get(npcc).stop();
 		npc.remove(npcc);
 		npcc.delete();
 		player.playSound(location, Sound.ORB_PICKUP, 1f, 1f);
@@ -119,7 +123,7 @@ public class Stage {
 			BlockUtils.replaceBlock(list, firstMat, dataF, true, secondMat, dataS, percent);
 
 		} else {
-		BlockUtils.replaceBlock(list, firstMat, dataF, false, 0, dataF, 0);
+			BlockUtils.replaceBlock(list, firstMat, dataF, false, 0, dataF, 0);
 		}
 		blocklist.addAll(list);
 		/*
@@ -155,6 +159,7 @@ public class Stage {
 				public void run() {
 					player.playSound(location, Sound.ORB_PICKUP, 1f, 1f);
 					npcList.delete();
+					particuleList.get(npcList).stop();
 				}
 			}, 20L * 1);
 		}
@@ -195,27 +200,43 @@ public class Stage {
 				switch (i) {
 				case (0):
 					player.playSound(a, Sound.NOTE_PLING, 1f, 1f);
-				npc.add(nm.spawnNpc(sg.getNpcNames()[i], a, sg.getProfession(), player));
-				break;
+					Npc n = nm.spawnNpc(sg.getNpcNames()[i], a, sg.getProfession(), player);
+					npc.add(n);
+					Particule p = new Particule(a.add(0, 2, 0));
+					particuleList.put(n, p);
+					p.play();
+					break;
 				case (1):
 					player.playSound(b, Sound.NOTE_PLING, 1f, 1f);
-				npc.add(nm.spawnNpc(sg.getNpcNames()[i], b, sg.getProfession(), player));
+					Npc n1 = nm.spawnNpc(sg.getNpcNames()[i], b, sg.getProfession(), player);
+					npc.add(n1);
+					Particule p1 = new Particule(b.add(0, 2, 0));
+					particuleList.put(n1, p1);
+					p1.play();
 				break;
 				case (2):
 					player.playSound(c, Sound.NOTE_PLING, 1f, 1f);
-				npc.add(nm.spawnNpc(sg.getNpcNames()[i], c, sg.getProfession(), player));
-				break;
+					Npc n2 = nm.spawnNpc(sg.getNpcNames()[i], c, sg.getProfession(), player);
+					npc.add(n2);
+					Particule p11 = new Particule(c.add(0, 2, 0));
+					particuleList.put(n2, p11);
+					p11.play();
+					break;
 				case (3):
 					player.playSound(d, Sound.NOTE_PLING, 1f, 1f);
-				npc.add(nm.spawnNpc(sg.getNpcNames()[i], d, sg.getProfession(), player));
+					Npc n3 = nm.spawnNpc(sg.getNpcNames()[i], d, sg.getProfession(), player);
+					npc.add(n3);
+					Particule p111 = new Particule(d.add(0, 2, 0));
+					particuleList.put(n3, p111);
+					p111.play();
 				break;
 				case (4):
 					TitlesLib.sendTitle(player, PacketPlayOutTitle.EnumTitleAction.TITLE, Lang.TITLE, 20, 20, 20, ChatColor.RED);
-				TitlesLib.sendTitle(player, PacketPlayOutTitle.EnumTitleAction.SUBTITLE, Lang.SUBTITLE, 20, 20, 20, ChatColor.WHITE);
-				player.playSound(location, Sound.LEVEL_UP, 1f, 1f);
-				canPick = true;
-				Bukkit.getScheduler().cancelTask(task);
-				break;
+					TitlesLib.sendTitle(player, PacketPlayOutTitle.EnumTitleAction.SUBTITLE, Lang.SUBTITLE, 20, 20, 20, ChatColor.WHITE);
+					player.playSound(location, Sound.LEVEL_UP, 1f, 1f);
+					canPick = true;
+					Bukkit.getScheduler().cancelTask(task);
+					break;
 				}
 				i++;
 			}
