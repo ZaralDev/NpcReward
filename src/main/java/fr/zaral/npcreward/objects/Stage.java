@@ -202,7 +202,7 @@ public class Stage {
 					player.playSound(a, Sound.NOTE_PLING, 1f, 1f);
 					Npc n = nm.spawnNpc(sg.getNpcNames()[i], a, sg.getProfession(), player);
 					npc.add(n);
-					Particule p = new Particule(a.add(0, 2, 0));
+					Particule p = new Particule(a.add(0, 3, 0));
 					particuleList.put(n, p);
 					p.play();
 					break;
@@ -210,7 +210,7 @@ public class Stage {
 					player.playSound(b, Sound.NOTE_PLING, 1f, 1f);
 					Npc n1 = nm.spawnNpc(sg.getNpcNames()[i], b, sg.getProfession(), player);
 					npc.add(n1);
-					Particule p1 = new Particule(b.add(0, 2, 0));
+					Particule p1 = new Particule(b.add(0, 3, 0));
 					particuleList.put(n1, p1);
 					p1.play();
 				break;
@@ -218,7 +218,7 @@ public class Stage {
 					player.playSound(c, Sound.NOTE_PLING, 1f, 1f);
 					Npc n2 = nm.spawnNpc(sg.getNpcNames()[i], c, sg.getProfession(), player);
 					npc.add(n2);
-					Particule p11 = new Particule(c.add(0, 2, 0));
+					Particule p11 = new Particule(c.add(0, 3, 0));
 					particuleList.put(n2, p11);
 					p11.play();
 					break;
@@ -226,7 +226,7 @@ public class Stage {
 					player.playSound(d, Sound.NOTE_PLING, 1f, 1f);
 					Npc n3 = nm.spawnNpc(sg.getNpcNames()[i], d, sg.getProfession(), player);
 					npc.add(n3);
-					Particule p111 = new Particule(d.add(0, 2, 0));
+					Particule p111 = new Particule(d.add(0, 3, 0));
 					particuleList.put(n3, p111);
 					p111.play();
 				break;
