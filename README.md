@@ -1,6 +1,6 @@
 # NpcReward
 
-Progress: 90%
+Progress: 98%
 
 apart from features
 
