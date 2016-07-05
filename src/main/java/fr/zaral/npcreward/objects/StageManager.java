@@ -61,7 +61,7 @@ public class StageManager {
         for (int i = 0 ; i < checkBlock.size() ; i++) {
         	Material type = checkBlock.get(i).getType();
             if (!type.equals(Material.AIR)) {
-            	if (type.equals(Material.LONG_GRASS) || type.equals(Material.YELLOW_FLOWER))
+            	if (type.equals(Material.LONG_GRASS) || type.equals(Material.YELLOW_FLOWER)  || type.equals(Material.DOUBLE_PLANT))
             		continue;
                 cantPlace = true;
             }
