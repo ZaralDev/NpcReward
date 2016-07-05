@@ -40,7 +40,7 @@ public class ItemRewardCommand implements CommandExecutor {
             ((Player)sender).getInventory().addItem(pl.getSettings().getItemReward());
             sender.sendMessage(Lang.ITEM_RECEIVED);
         } else {
-            Player target = Bukkit.getPlayer(args[1]);
+            Player target = Bukkit.getPlayer(args[0]);
             if (target != null) {
                 target.getInventory().addItem(pl.getSettings().getItemReward());
                 target.sendMessage(Lang.ITEM_RECEIVED);
