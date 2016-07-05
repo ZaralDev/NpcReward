@@ -5,7 +5,11 @@ import fr.zaral.npcreward.listeners.ListenerManager;
 import fr.zaral.npcreward.objects.RewardManager;
 import fr.zaral.npcreward.objects.StageManager;
 import fr.zaral.npcreward.utils.CodeUtils;
+import fr.zaral.npcreward.utils.Metrics;
 import lombok.Getter;
+
+import java.io.IOException;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -41,6 +45,12 @@ public class NpcReward extends JavaPlugin {
         CodeUtils.logToConsole("Loading Rewards...");
         RewardManager.get().loadRewards();
 
+        try {
+			new Metrics(this).start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @Override
