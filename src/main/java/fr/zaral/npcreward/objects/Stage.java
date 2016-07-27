@@ -1,5 +1,7 @@
 package fr.zaral.npcreward.objects;
 
+import fr.zaral.api.events.PlayerPickEvent;
+import fr.zaral.api.events.RewardEndEvent;
 import fr.zaral.npcreward.Lang;
 import fr.zaral.npcreward.NpcReward;
 import fr.zaral.npcreward.Settings;
@@ -42,10 +44,9 @@ public class Stage {
 		this.player = player;
 		this.location = player.getLocation();
 		this.pickLeft = Settings.get().getMaxPick();
-		startStage();
 	}
 
-	private void startStage() {
+	public void startStage() {
 		createPlinth();
 		spawnPnj();
 	}
@@ -81,6 +82,10 @@ public class Stage {
 	public void pick(Npc npcc) {
 		pickLeft--;
 		Reward reward = RewardManager.get().getRandomReward();
+		
+		PlayerPickEvent event = new PlayerPickEvent(this, getPlayer(), reward, npcc);
+		Bukkit.getPluginManager().callEvent(event);
+		
 		reward.setReward(this.player);
 		particuleList.get(npcc).stop();
 		npc.remove(npcc);
@@ -174,6 +179,8 @@ public class Stage {
 				StageManager.get().removeStage(getThis());
 			}
 		}, 20L * 5);
+		
+		Bukkit.getPluginManager().callEvent(new RewardEndEvent(this, getPlayer()));
 	}
 
 	public void removeStageNoCd() {

@@ -26,8 +26,7 @@ public class Reward {
     @Getter
     private String privateMsg, globalMsg;
     
-    public Reward(String rewardName, List<String> commandList, List<String> itemList
-    		, String globalMessage, String privateMessage) {
+    public Reward(String rewardName, List<String> commandList, List<String> itemList, String globalMessage, String privateMessage) {
         this.name = rewardName;
         this.command = commandList;
         this.itemList = itemList;
